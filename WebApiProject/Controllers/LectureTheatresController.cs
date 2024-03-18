@@ -1,3 +1,4 @@
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstractions;
 
@@ -7,13 +8,33 @@ namespace WebApiProject.Controllers
     [Route("[controller]")]
     public class LectureTheatresController : ControllerBase
     {
-        private readonly ILogger<LectureTheatresController> _logger;
         private readonly IServiceManager _serviceManager;
 
-        public LectureTheatresController(ILogger<LectureTheatresController> logger, IServiceManager serviceManager)
+        public LectureTheatresController(IServiceManager serviceManager)
         {
-            _logger = logger;
             _serviceManager = serviceManager;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            return Ok(await _serviceManager.LectureTheatreService.GetAllAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAccountById(int id, CancellationToken cancellationToken)
+        {
+            var accountDto = await _serviceManager.LectureTheatreService.GetByIdAsync(id, cancellationToken);
+
+            return Ok(accountDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] LectureTheatreForCreationDto LectureTheatreForCreationDto, CancellationToken cancellationToken)
+        {
+            var response = await _serviceManager.LectureTheatreService.AddAsync(LectureTheatreForCreationDto, cancellationToken);
+
+            return CreatedAtAction(nameof(Add), new { id = response.Id }, response);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Domain.Entities
 {
     public class Lecture
     {
@@ -12,15 +14,13 @@
         public required LectureTheatre LectureTheatre { get; set; }
     }
 
-    public class WeeklySchedule
+    public struct WeeklySchedule
     {
         public DayOfWeek DayOfWeek { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public int DurationInMinutes { get; set; }
-    }
 
-    public enum DayOfWeek
-    {
-        Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6, Sunday = 7
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm:ss}")]
+        public string StartTime { get; set; }
+        public int DurationInMinutes { get; set; }
     }
 }

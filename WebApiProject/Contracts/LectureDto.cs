@@ -1,4 +1,6 @@
-﻿namespace Contracts
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Contracts
 {
     public class LectureDto
     {
@@ -12,10 +14,13 @@
         public required LectureTheatreDto LectureTheatre { get; set; }
     }
 
-    public class WeeklyScheduleDto
+    public struct WeeklyScheduleDto
     {
         public DayOfWeek DayOfWeek { get; set; }
-        public TimeSpan StartTime { get; set; }
+
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm:ss}")]
+        public string StartTime { get; set; }
         public int DurationInMinutes { get; set; }
     }
 }

@@ -36,5 +36,12 @@ namespace Services
 
             return student.Adapt<StudentDto>();
         }
+
+        public async Task<IEnumerable<StudentDto>> RetrieveAsync(int subjectId, CancellationToken cancellationToken = default)
+        {
+            var students = await _repositoryManager.StudentRepository.GetBySubjectIdAsync(subjectId, cancellationToken);
+
+            return students.Adapt<IEnumerable<StudentDto>>();
+        }
     }
 }

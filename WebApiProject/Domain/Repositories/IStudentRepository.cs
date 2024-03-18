@@ -10,6 +10,10 @@ namespace Domain.Repositories
 
         void Add(Student Student);
 
+        void Update(Student Student);
+
         void Delete(Student Student);
+
+        Task<IEnumerable<Student>> GetBySubjectIdAsync(int subjectId, CancellationToken cancellationToken);
     }
 }

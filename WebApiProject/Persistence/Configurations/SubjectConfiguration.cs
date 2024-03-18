@@ -15,6 +15,8 @@ namespace Persistence.Configurations
             builder.Property(subject => subject.Name).HasMaxLength(60);
 
             builder.HasMany(subject => subject.Lectures);
+
+            builder.HasMany(m => m.EnrolledStudents);
         }
     }
 }

@@ -7,5 +7,10 @@
         public int Capacity { get; set; }
 
         public List<Lecture> Lectures { get; set; } = new List<Lecture>();
+
+        public bool CapacityExceeds()
+        {
+            return Lectures.Count > Capacity;
+        }
     }
 }

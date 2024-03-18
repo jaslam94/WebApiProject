@@ -13,5 +13,7 @@ namespace Domain.Repositories
         void Add(Subject Subject);
 
         void Delete(Subject Subject);
+
+        Task<IEnumerable<Subject>> GetByStudentIdAsync(int studentId, CancellationToken cancellationToken);
     }
 }

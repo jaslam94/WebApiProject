@@ -9,5 +9,7 @@ namespace Services.Abstraction
         Task<IEnumerable<StudentDto>> GetAllAsync(CancellationToken cancellationToken = default);
 
         Task<StudentDto> GetByIdAsync(int id, CancellationToken cancellationToken = default);
+
+        Task<IEnumerable<StudentDto>> RetrieveAsync(int subjectId, CancellationToken cancellationToken = default);
     }
 }
